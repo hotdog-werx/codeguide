@@ -10,6 +10,8 @@ if [ "${CI:-false}" = 'true' ]; then
     testPattern=''
 fi
 
+modules=("$PYTHON_MODULE")
+
 sources=''
 for module in "${modules[@]}"; do
     if [ -z "$sources" ]; then
