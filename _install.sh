@@ -1,10 +1,10 @@
 #!/bin/bash
 set -xeuo pipefail
 
-ref=$1
+ref=$(echo "$1" | sed 's/\//-/g')
 
 rm -rf .codeguide && mkdir -p .codeguide
-curl -L https://github.com/hotdog-werx/codeguide/archive/refs/heads/$ref.zip | bsdtar -xvf- -C .codeguide
+curl -L https://github.com/hotdog-werx/codeguide/archive/refs/heads/$1.zip | bsdtar -xvf- -C .codeguide
 
 destDir=.codeguide
 rootDir=.codeguide/codeguide-$ref
