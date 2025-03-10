@@ -1,7 +1,7 @@
 .EXPORT_ALL_VARIABLES:
 SHELL := /bin/bash
 MAKE_TASKS := \
-	install
+	install tests
 
 # tasks with folder names need to be declared as phony
 .PHONY: tests build
