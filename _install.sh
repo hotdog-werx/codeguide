@@ -12,6 +12,7 @@ rootDir=.codeguide/codeguide-$ref
 mkdir -p "$destDir"
 mv "$rootDir/config" $destDir/config
 mv "$rootDir/tasks" $destDir/tasks
+chmod +x "$destDir/tasks/"*.sh
 
 rm -rf "$rootDir"
 echo "codeguide@$ref" > "$destDir/VERSION"
