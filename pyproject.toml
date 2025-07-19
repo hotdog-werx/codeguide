@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "codeguide"
+version = "0.0.0"
+description = "A guide to coding practices and standards for hotdog-werx"
+authors = [
+    { name = "hotdog-werx" },
+]
+readme = "README.md"
+requires-python = ">=3.12, <4"
+
+dependencies = [
+    "structlog >= 25.4.0",
+]
+
+[project.scripts]
+link-codeguide = "codeguide.__main__:main"
+
+[tool.hatch.build]
+packages = ["src/codeguide"]
+include = ["src/codeguide/resources/**"]
+
+[tool.poe]
+include = ["src/codeguide/resources/poe/dev-setup.toml"]

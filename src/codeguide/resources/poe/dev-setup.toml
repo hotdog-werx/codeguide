@@ -1,0 +1,28 @@
+[tool.poe.env]
+CI.default = "false"
+
+[tool.poe.executor]
+type = "uv"
+
+## Tasks definitions
+[tool.poe.tasks]
+
+uv-sync.help = "sync uv environment"
+uv-sync.cmd = "uv sync --all-extras"
+
+setup.help = "setup dev environment"
+setup.sequence = ["uv-sync", { expr = "'Ready!'" }]
+
+
+## No-op task to skip setup in CI
+[tool.poe.tasks.setup-hook]
+help = "run setup in non-CI environments"
+control = { expr = "${CI}.lower()" }
+
+[[tool.poe.tasks.setup-hook.switch]]
+case = "true"
+expr = "'skip dev setup in CI'"
+
+[[tool.poe.tasks.setup-hook.switch]]
+case = "__default__"
+ref = "setup"
