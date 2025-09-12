@@ -4,6 +4,10 @@ python.uv_venv_auto = true
 
 [tools]
 uv = "0.7.20"
+starship = "1.21.1"
 taplo = "0.10.0"
 node = "22.17.0"
 pnpm = "10.13.1"
+
+[hooks]
+postinstall = ["uvx pkglink --from . codeguide"]

@@ -1,27 +1,30 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "codeguide"
 version = "0.0.0"
 description = "A guide to coding practices and standards for hotdog-werx"
-authors = [
-    { name = "hotdog-werx" },
-]
+authors = [{ name = "hotdog-werx" }]
 readme = "README.md"
-requires-python = ">=3.12, <4"
+license = 'MIT'
+requires-python = ">=3.11"
 
-dependencies = [
-    "structlog >= 25.4.0",
+dependencies = []
+
+
+[dependency-groups]
+dev = []
+
+[tool.hatch]
+build.packages = ["codeguide"]
+metadata.allow-direct-references = true
+
+[tool]
+poe.include = [".codeguide/configs/poe/dev-setup.toml"]
+pyright.typeCheckingMode = "standard"
+ruff.extend = ".codeguide/configs/ruff.toml"
+ruff.exclude = [
+  "tests/**/fixtures/**", # Exclude test fixture resources from linting
 ]
 
-[project.scripts]
-link-codeguide = "codeguide.__main__:main"
-
-[tool.hatch.build]
-packages = ["src/codeguide"]
-include = ["src/codeguide/resources/**"]
-
-[tool.poe]
-include = ["src/codeguide/resources/poe/dev-setup.toml"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
