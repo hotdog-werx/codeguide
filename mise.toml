@@ -1,0 +1,11 @@
+[settings]
+experimental = true
+python.uv_venv_auto = true
+
+[tools]
+uv = "0.7.20"
+starship = "1.21.1"
+dprint = "0.50.1"
+
+[hooks]
+postinstall = ["uvx pkglink --from . codeguide", "poe setup-hook"]

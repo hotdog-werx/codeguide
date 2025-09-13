@@ -1,0 +1,36 @@
+[tool.poe.env]
+CI.default = "false"
+
+## Tasks definitions
+[tool.poe.tasks]
+## Run uv if pyproject.toml is present
+uv-sync.help = "sync uv environment"
+uv-sync.control = { expr = "pathlib.Path('pyproject.toml').exists()", imports = ["pathlib"] }
+uv-sync.switch = [
+  { case = "True", cmd = "uv sync --all-groups" },
+  { case = "__default__", expr = "'skipping uv sync, no pyproject.toml found'" },
+]
+
+## Run pnpm install if pnpm-lock.yaml is present
+pnpm-install.help = "sync pnpm environment"
+pnpm-install.control = { expr = "pathlib.Path('pnpm-lock.yaml').exists()", imports = ["pathlib"] }
+pnpm-install.switch = [
+  { case = "True", cmd = "pnpm install" },
+  { case = "__default__", expr = "'skipping pnpm install, no pnpm-lock.yaml found'" },
+]
+
+## Mise setup task
+setup.help = "setup dev environment"
+setup.sequence = [
+  "uv-sync",
+  "pnpm-install",
+  { expr = "'Ready!'" },
+]
+
+## No-op task to skip setup in CI
+setup-hook.help = "run setup in non-CI environments"
+setup-hook.control = { expr = "${CI}.lower()" }
+setup-hook.switch = [
+  { case = "true", expr = "'skip dev setup in CI'" },
+  { case = "__default__", ref = "setup" },
+]

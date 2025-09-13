@@ -1,3 +1,4 @@
 # codeguide
 
-Collection of configurations and scripts to use in hotdog-werx repos
+Collection of configurations and scripts to use in hotdog-werx repos. And more
+and more and more
