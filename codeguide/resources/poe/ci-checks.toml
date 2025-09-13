@@ -1,0 +1,15 @@
+[tool.poe.tasks]
+check-python.help = "run python checks"
+check-python.cmd = "uvx tbelt check python"
+
+check-dprint.help = "run dprint checks"
+check-dprint.cmd = "uvx tbelt check dprint"
+
+check-basedpyright.help = "run base dpyright checks"
+check-basedpyright.cmd = "uvx tbelt check basedpyright"
+
+check-complexity.help = "run complexity checks"
+check-complexity.cmd = "uvx tbelt check complexity"
+
+check-coverage.help = "run coverage checks"
+check-coverage.cmd = "uvx tbelt check coverage"
