@@ -36,7 +36,7 @@ profiles:
         args:
           - -${TB_COVERAGE_VERBOSE:v}
           - --tb=short
-          - --cov-config=${TB_COVERAGE_CONFIG:.codeguide/configs/coverage.toml}
+          - --cov-config=${TB_COVERAGE_CONFIG:.codeguide/configs/coveragerc.toml}
           - --cov=${TB_PROJECT_SOURCE:src}
           - --cov-report=term-missing
           - --cov-report=html:.coverage-files/htmlcov
