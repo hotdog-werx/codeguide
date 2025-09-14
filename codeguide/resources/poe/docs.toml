@@ -1,0 +1,12 @@
+[tool.poe.tasks]
+# Development server for docs
+dev-docs.help = "Start MkDocs development server"
+dev-docs.cmd = "mkdocs serve --dev-addr=127.0.0.1:8000"
+
+# Build documentation
+build-docs.help = "Build static documentation site"
+build-docs.cmd = "mkdocs build --clean"
+
+# Clean docs build
+clean-docs.help = "Clean documentation build artifacts"
+clean-docs.cmd = "rm -rf site/"
