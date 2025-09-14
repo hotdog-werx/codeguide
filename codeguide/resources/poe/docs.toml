@@ -10,7 +10,3 @@ build-docs.cmd = "mkdocs build --clean"
 # Clean docs build
 clean-docs.help = "Clean documentation build artifacts"
 clean-docs.cmd = "rm -rf site/"
-
-# Deploy docs (for CI/CD)
-deploy-docs.help = "Deploy documentation to GitHub Pages"
-deploy-docs.cmd = "mkdocs gh-deploy --force"
