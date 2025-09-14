@@ -1,0 +1,6 @@
+[tool.poe.tasks]
+format-python.help = "format python code"
+format-python.cmd = "uvx tbelt format python"
+
+format-dprint.help = "format with dprint"
+format-dprint.cmd = "uvx tbelt format dprint"

@@ -1,0 +1,32 @@
+/* Custom styles for CodeGuide documentation */
+
+:root {
+  --md-primary-fg-color: #2196f3;
+  --md-primary-fg-color--light: #64b5f6;
+  --md-primary-fg-color--dark: #1976d2;
+}
+
+/* Custom styling for code blocks */
+.highlight .hll {
+  background-color: #ffffcc;
+}
+
+/* Better spacing for navigation */
+.md-nav__item--nested > .md-nav__link {
+  font-weight: 500;
+}
+
+/* Custom admonition styles */
+.md-typeset .admonition.hotdog {
+  border-color: #ff6b6b;
+}
+
+.md-typeset .admonition.hotdog > .admonition-title {
+  background-color: #ff6b6b1a;
+  border-color: #ff6b6b;
+}
+
+.md-typeset .admonition.hotdog > .admonition-title::before {
+  background-color: #ff6b6b;
+  mask-image: var(--md-admonition-icon--note);
+}
