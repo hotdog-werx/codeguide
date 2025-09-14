@@ -30,3 +30,5 @@ jobs:
         run: poe check-dprint
       - name: check-python
         run: poe check-python
+      - name: build-docs
+        run: poe build-docs
