@@ -37,7 +37,7 @@ max-complexity = 7
 convention = "google"
 
 [lint.extend-per-file-ignores]
-"/*/packages/python/tests/**.py" = [
+"test_*.py" = [
   "ANN201", # Allow tests to not have a return type
   "ARG001", # Ignore unused arguments in tests - sometimes required for fixtures
   "D101", # Allow test code to have public classes without docstrings
@@ -46,3 +46,4 @@ convention = "google"
   # "PT004",  # Allow none-returning fixtures to not lead with underscore due to pyright conflict
   "S101", # Please sir may I use assert in my tests?
 ]
+"**/conftest.py" = ["ANN201", "ARG001", "D101", "D102", "D103", "S101"]
