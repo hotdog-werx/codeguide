@@ -4,3 +4,9 @@ format-python.cmd = "uvx tbelt format python"
 
 format-dprint.help = "format with dprint"
 format-dprint.cmd = "uvx tbelt format dprint"
+
+format.help = "run all formatters"
+format.sequence = [
+  "format-python",
+  "format-dprint",
+]

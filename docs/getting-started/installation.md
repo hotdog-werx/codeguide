@@ -25,6 +25,6 @@ uvx pkglink github:hotdog-werx/codeguide@[branch-or-commit]
 
 ## Verify Installation
 
-The above command should create a `.pkglink/.codeguide` directory in your project with
-all the configuration files that codeguide provides to keep your project
-consistent.
+The above command should create a `.pkglink/.codeguide` directory in your
+project with all the configuration files that codeguide provides to keep your
+project consistent.
