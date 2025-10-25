@@ -9,7 +9,7 @@ profiles:
         args:
           - ruff@${TB_RUFF_VERSION:latest}
           - --config
-          - ${TB_RUFF_CONFIG:.codeguide/configs/ruff.toml}
+          - ${TB_RUFF_CONFIG:.pkglink/.codeguide/configs/ruff.toml}
           - check
         file_handling_mode: batch
         default_target: .
@@ -19,7 +19,7 @@ profiles:
         args:
           - ruff@${TB_RUFF_VERSION:latest}
           - --config
-          - ${TB_RUFF_CONFIG:.codeguide/configs/ruff.toml}
+          - ${TB_RUFF_CONFIG:.pkglink/.codeguide/configs/ruff.toml}
           - format
           - --check
         file_handling_mode: batch
@@ -33,7 +33,7 @@ profiles:
         args:
           - ruff@${TB_RUFF_VERSION:latest}
           - --config
-          - ${TB_RUFF_CONFIG:.codeguide/configs/ruff.toml}
+          - ${TB_RUFF_CONFIG:.pkglink/.codeguide/configs/ruff.toml}
           - format
           - --line-length=80
         file_handling_mode: batch
@@ -51,7 +51,7 @@ profiles:
         args:
           - ruff@${TB_RUFF_VERSION:latest}
           - --config
-          - ${TB_RUFF_CONFIG:.codeguide/configs/ruff.toml}
+          - ${TB_RUFF_CONFIG:.pkglink/.codeguide/configs/ruff.toml}
           - format
           - --line-length=120
         file_handling_mode: batch
@@ -62,7 +62,7 @@ profiles:
         args:
           - ruff@${TB_RUFF_VERSION:latest}
           - --config
-          - ${TB_RUFF_CONFIG:.codeguide/configs/ruff.toml}
+          - ${TB_RUFF_CONFIG:.pkglink/.codeguide/configs/ruff.toml}
           - check
           - --fix
           - --fix-only
@@ -74,7 +74,7 @@ profiles:
         args:
           - ruff@${TB_RUFF_VERSION:latest}
           - --config
-          - ${TB_RUFF_CONFIG:.codeguide/configs/ruff.toml}
+          - ${TB_RUFF_CONFIG:.pkglink/.codeguide/configs/ruff.toml}
           - format
         file_handling_mode: batch
         default_target: .

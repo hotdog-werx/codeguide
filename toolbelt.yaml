@@ -1,2 +1,2 @@
 include:
-  - .codeguide/toolbelt/toolbelt.yaml
+  - .pkglink/.codeguide/toolbelt/toolbelt.yaml

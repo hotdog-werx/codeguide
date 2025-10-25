@@ -13,9 +13,9 @@ Create `poe_tasks.toml` in your project root with the following content:
 ```toml
 [tool.poe]
 include = [
-  ".codeguide/poe/ci-checks.toml",
-  ".codeguide/poe/dev-setup.toml",
-  ".codeguide/poe/docs.toml",
+  ".pkglink/.codeguide/poe/ci-checks.toml",
+  ".pkglink/.codeguide/poe/dev-setup.toml",
+  ".pkglink/.codeguide/poe/docs.toml",
 ]
 
 [tool.poe.tasks]
@@ -36,7 +36,7 @@ Create a `toolbelt.yaml` file in your project root with the following content:
 
 ```yaml
 include:
-  - .codeguide/toolbelt/toolbelt.yaml
+  - .pkglink/.codeguide/toolbelt/toolbelt.yaml
 
 variables:
   TB_PROJECT_SOURCE: src # adjust to match your python package

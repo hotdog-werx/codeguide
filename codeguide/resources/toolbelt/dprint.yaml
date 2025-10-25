@@ -27,4 +27,4 @@ profiles:
         description: format code with dprint
 
 variables:
-  TB_DPRINT_CONFIG: .codeguide/configs/dprint.json
+  TB_DPRINT_CONFIG: .pkglink/.codeguide/configs/dprint.json

@@ -8,4 +8,4 @@ starship = "1.21.1"
 dprint = "0.50.1"
 
 [hooks]
-postinstall = ["uvx pkglink --from . codeguide", "poe setup-hook"]
+postinstall = ["uvx pkglink sync", "poe setup-hook"]

@@ -26,8 +26,8 @@ Create configuration files to inherit CodeGuide's standards:
 ```toml
 [tool.poe]
 include = [
-  ".codeguide/poe/ci-checks.toml",
-  ".codeguide/poe/dev-setup.toml",
+  ".pkglink/.codeguide/poe/ci-checks.toml",
+  ".pkglink/.codeguide/poe/dev-setup.toml",
 ]
 ```
 
@@ -35,7 +35,7 @@ include = [
 
 ```yaml
 include:
-  - .codeguide/toolbelt/toolbelt.yaml
+  - .pkglink/.codeguide/toolbelt/toolbelt.yaml
 
 variables:
   TB_PROJECT_SOURCE: src # adjust to your package location

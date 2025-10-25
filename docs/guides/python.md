@@ -17,7 +17,7 @@ my-python-project/
 │   └── test_main.py
 ├── pyproject.toml           # Project configuration
 ├── README.md                # Project documentation
-└── .codeguide/              # CodeGuide configuration (generated)
+└── .pkglink/.codeguide/              # CodeGuide configuration (generated)
 ```
 
 **Src Layout (For complex projects with multiple packages):**
@@ -29,7 +29,7 @@ my-python-project/
 │   └── utils_package/
 ├── tests/
 ├── pyproject.toml
-└── .codeguide/
+└── .pkglink/.codeguide/
 ```
 
 !!! tip "Choose What Makes Sense" Use the flat layout for most projects. Only
@@ -73,10 +73,10 @@ Property              Value
  Tool Name             ruff-format                                        
  Description           Final Python formatting pass                       
  Raw Command           uvx ruff@${TB_RUFF_VERSION:latest} --config        
-                       ${TB_RUFF_CONFIG:.codeguide/configs/ruff.toml}     
+                       ${TB_RUFF_CONFIG:.pkglink/.codeguide/configs/ruff.toml}     
                        format                                             
  Expanded Command      uvx ruff@0.13.0 --config                           
-                       .codeguide/configs/ruff.toml format                
+                       .pkglink/.codeguide/configs/ruff.toml format                
  File Mode             batch                                              
  Default Target        .
 ```
@@ -100,7 +100,7 @@ CodeGuide provides sensible defaults, but you can customize them per project:
 3. **Extend CodeGuide defaults:**
    ```toml
    # ruff.toml
-   extend = ".codeguide/configs/ruff.toml"
+   extend = ".pkglink/.codeguide/configs/ruff.toml"
 
    [lint.extend-per-file-ignores]
    "src/notebooks/*.py" = ["ALL"] # Ignore all rules in notebooks
