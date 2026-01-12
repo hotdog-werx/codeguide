@@ -2,5 +2,6 @@ __pycache__/
 site
 .venv
 dist
+.repolish/*
 .pkglink/
 /.editorconfig

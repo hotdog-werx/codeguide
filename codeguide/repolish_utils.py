@@ -14,7 +14,7 @@ def get_owner_repo() -> tuple[str, str]:
     ).strip()
 
     match = re.search(
-        r'(?:https://(?:[^/]+@)?github\\.com/|git@github\\.com:)([^/]+)/([^.]+)(?:\\.git)?',
+        r'(?:https://(?:[^/]+@)?github\.com/|git@github\.com:)([^/]+)/([^.]+)(?:\.git)?$',
         git_remote,
     )
     if match:
