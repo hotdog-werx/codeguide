@@ -16,7 +16,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+    outputs:
+      has-docs: {% raw %}${{ steps.check-docs.outputs.has-docs }}{% endraw %}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: check-docs-folder
+        id: check-docs
+        run: |
+          if [ -d "docs" ]; then
+            echo "has-docs=true" >> $GITHUB_OUTPUT
+          else
+            echo "has-docs=false" >> $GITHUB_OUTPUT
+            echo "No docs folder found, skipping documentation deployment"
+          fi
+
   build-and-deploy:
+    needs: check-docs
+    if: needs.check-docs.outputs.has-docs == 'true'
     environment:
       name: github-pages
       url: {% raw %}${{ steps.deployment.outputs.page_url }}{% endraw %}
@@ -24,6 +43,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: setup-uv
         uses: astral-sh/setup-uv@v6
         with:
