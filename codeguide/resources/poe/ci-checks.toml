@@ -13,3 +13,6 @@ check-complexity.cmd = "uvx tbelt check complexity"
 
 check-coverage.help = "run coverage checks"
 check-coverage.cmd = "uvx tbelt check coverage"
+
+check-repolish.help = "run repolish checks"
+check-repolish.cmd = "uvx --wih .pkglink/codeguide repolish --check"

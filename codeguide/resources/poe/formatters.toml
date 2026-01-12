@@ -10,3 +10,6 @@ format.sequence = [
   "format-python",
   "format-dprint",
 ]
+
+repolish.help = "run repolish to format repository files"
+repolish.cmd = "uvx --with .pkglink/codeguide repolish"

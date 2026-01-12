@@ -3,7 +3,7 @@ experimental = true
 python.uv_venv_auto = true
 
 [tools]
-uv = "0.9.5"
+uv = "0.7.20"
 starship = "1.24.0"
 dprint = "0.50.2"
 
