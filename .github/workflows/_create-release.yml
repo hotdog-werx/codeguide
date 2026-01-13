@@ -1,0 +1,108 @@
+name: create-release
+
+on:
+  workflow_call:
+    inputs:
+      build-command:
+        description: 'command to execute to build the project'
+        required: false
+        type: string
+        default: 'poe build'
+      publish-command:
+        description: 'command to execute to publish the package'
+        required: false
+        type: string
+        default: 'poe publish'
+    secrets:
+      PYPI_TOKEN:
+        description: 'PyPI API token for publishing packages'
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  github-release:
+    if: >
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release/')
+    runs-on: ubuntu-latest
+    outputs:
+      release-version: ${{ steps.releez.outputs.release-version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup-uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: mise
+        uses: jdx/mise-action@v3
+
+      - name: releez-finalize
+        id: releez
+        uses: hotdog-werx/releez-finalize-action@v0
+        with:
+          is-full-release: 'true'
+
+      - name: enhance-release-notes
+        id: enhance-notes
+        run: |
+          NOTES="${{ steps.releez.outputs.release-notes }}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          PR_LINK="https://github.com/${{ github.repository }}/pull/${PR_NUMBER}"
+          ENHANCED_NOTES="${NOTES}\n\n---\nAutomated release triggered by [#${PR_NUMBER}](${PR_LINK})"
+          echo "enhanced-notes<<EOF" >> $GITHUB_OUTPUT
+          echo -e "${ENHANCED_NOTES}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: create-github-release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.releez.outputs.release-version }}
+          body: ${{ steps.enhance-notes.outputs.enhanced-notes }}
+
+      - name: regenerate-changelog
+        run: releez changelog generate
+
+      - name: commit-changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: 'chore(ci): regenerate changelog after release [skip ci]'
+          branch: ${{ github.event.pull_request.head.ref }}
+          file_pattern: 'CHANGELOG.md'
+          
+
+  build-publish:
+    if: inputs.build-command != '' || inputs.publish-command != ''
+    needs: github-release
+    runs-on: ubuntu-latest
+    env:
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup-uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: mise
+        uses: jdx/mise-action@v3
+      
+      - name: expose-version
+        run: |
+          {
+            echo "IS_RELEASE=true"
+            echo "VERSION=${{ needs.github-release.outputs.release-version }}"
+          } >> $GITHUB_ENV
+
+      - name: build-project
+        if: inputs.build-command != ''
+        run: ${{ inputs.build-command }}
+
+      - name: publish-package
+        if: inputs.publish-command != ''
+        run: ${{ inputs.publish-command }}
