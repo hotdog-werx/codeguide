@@ -71,7 +71,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'chore(ci): regenerate changelog after release [skip ci]'
-          branch: ${{ github.event.pull_request.head.ref }}
+          branch: ${{ github.event.pull_request.base.ref }}
           file_pattern: 'CHANGELOG.md'
           
 

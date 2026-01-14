@@ -18,6 +18,8 @@ minutes.
   setup instructions
 - **[Python Projects](guides/python.md)** - Best practices for Python
   development
+- **[GitHub Actions Workflows](guides/workflows.md)** - Workflow naming conventions
+  and structure
 - **[Quick Start](getting-started/quick-start.md)** - Get running with CodeGuide
   fast
 

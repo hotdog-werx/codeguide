@@ -1,0 +1,41 @@
+name: run-checks
+
+on:
+  workflow_call:
+    inputs:
+      operating-systems:
+        description: 'JSON array of operating systems to run checks on'
+        required: false
+        type: string
+        default: '["ubuntu-latest"]'
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ${{ fromJSON(inputs.operating-systems) }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup-uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: 3.11
+          activate-environment: true
+      - name: mise
+        uses: jdx/mise-action@v2
+      - name: poe
+        run: uv tool install poethepoet
+      - name: dependencies
+        run: uvx --from poethepoet poe uv-sync
+      - name: check-dprint
+        run: poe check-dprint
+      - name: check-python
+        run: poe check-python
+      - name: build-docs
+        run: poe build-docs
+

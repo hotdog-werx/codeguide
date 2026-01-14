@@ -1,4 +1,5 @@
 directories:
   - ./.pkglink/.codeguide/templates
 
-context: {}
+context:
+  codeguide_ref: topic/repolish
