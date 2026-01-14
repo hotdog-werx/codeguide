@@ -1,0 +1,6 @@
+[tool.poe.tasks]
+
+_pull-tags.cmd = "git pull --tags -f"
+
+start-releez.help = "release start with releez"
+start-releez.sequence = ["_pull-tags", { cmd = "releez release start" }]
