@@ -11,10 +11,10 @@ We use a naming convention to distinguish between **callable workflows** (reusab
 Callable workflows contain the actual implementation logic and are designed to be called by other workflows. They are prefixed with an underscore (`_`) to signal that they are "internal" and not meant to be triggered directly by events.
 
 **Examples:**
-- `_build-docs.yml` - Builds and deploys documentation
-- `_run-checks.yml` - Runs CI checks (linting, type checking, tests)
-- `_create-release.yml` - Creates a new release
-- `_publish-package.yml` - Publishes package to PyPI
+- `_build-docs.yaml` - Builds and deploys documentation
+- `_run-checks.yaml` - Runs CI checks (linting, type checking, tests)
+- `_create-release.yaml` - Creates a new release
+- `_publish-package.yaml` - Publishes package to PyPI
 
 **Characteristics:**
 - Use `on: workflow_call:` trigger
@@ -27,9 +27,9 @@ Callable workflows contain the actual implementation logic and are designed to b
 Event-driven workflows are triggered by GitHub events and serve as entry points. They typically call one or more callable workflows.
 
 **Examples:**
-- `ci-checks.yml` - Triggered on push/PR, calls `_run-checks.yml`
-- `deploy-docs.yml` - Triggered on push to master, calls `_build-docs.yml`
-- `auto-release.yml` - Triggered on PR merge, calls `_create-release.yml` and `_publish-package.yml`
+- `ci-checks.yaml` - Triggered on push/PR, calls `_run-checks.yaml`
+- `deploy-docs.yaml` - Triggered on push to master, calls `_build-docs.yaml`
+- `auto-release.yaml` - Triggered on PR merge, calls `_create-release.yaml` and `_publish-package.yaml`
 
 **Characteristics:**
 - Use event triggers (`on: push:`, `on: pull_request:`, etc.)
@@ -51,13 +51,13 @@ The underscore prefix convention offers several benefits:
 
 ```
 .github/workflows/
-├── _build-docs.yml          # Callable: Documentation build/deploy logic
-├── _create-release.yml      # Callable: Release creation logic
-├── _publish-package.yml     # Callable: Package publishing logic
-├── _run-checks.yml          # Callable: CI checks logic
-├── auto-release.yml         # Event-driven: Runs on PR merge
-├── ci-checks.yml            # Event-driven: Runs on push/PR
-└── deploy-docs.yml          # Event-driven: Runs on push to master
+├── _build-docs.yaml          # Callable: Documentation build/deploy logic
+├── _create-release.yaml      # Callable: Release creation logic
+├── _publish-package.yaml     # Callable: Package publishing logic
+├── _run-checks.yaml          # Callable: CI checks logic
+├── auto-release.yaml         # Event-driven: Runs on PR merge
+├── ci-checks.yaml            # Event-driven: Runs on push/PR
+└── deploy-docs.yaml          # Event-driven: Runs on push to master
 ```
 
 ## Using Callable Workflows
@@ -74,7 +74,7 @@ on:
 
 jobs:
   checks:
-    uses: ./.github/workflows/_run-checks.yml
+    uses: ./.github/workflows/_run-checks.yaml
 ```
 
 ### From codeguide Repository
@@ -91,7 +91,7 @@ on:
 
 jobs:
   checks:
-    uses: hotdog-werx/codeguide/.github/workflows/_run-checks.yml@ref
+    uses: hotdog-werx/codeguide/.github/workflows/_run-checks.yaml@ref
 ```
 
 ## Template Generation with Repolish

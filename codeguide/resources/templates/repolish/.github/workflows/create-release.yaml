@@ -8,7 +8,7 @@ on:
 
 jobs:
   github-release:
-    uses: hotdog-werx/repolish/.github/workflows/_create-release.yml@{{ cookiecutter.codeguide_ref }}
+    uses: hotdog-werx/repolish/.github/workflows/_create-release.yaml@{{ cookiecutter.codeguide_ref }}
     secrets: inherit
     with:
       build-command: '{{ cookiecutter.build_command }}'

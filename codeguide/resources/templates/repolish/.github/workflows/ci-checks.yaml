@@ -8,7 +8,7 @@ on:
 
 jobs:
   run-checks:
-    uses: hotdog-werx/repolish/.github/workflows/_run-checks.yml@{{ cookiecutter.codeguide_ref }}
+    uses: hotdog-werx/repolish/.github/workflows/_run-checks.yaml@{{ cookiecutter.codeguide_ref }}
     with:
       operating-systems: '{{ cookiecutter.ci_operating_systems }}'
 
