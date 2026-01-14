@@ -73,7 +73,6 @@ jobs:
           commit_message: 'chore(ci): regenerate changelog after release [skip ci]'
           branch: ${{ github.event.pull_request.base.ref }}
           file_pattern: 'CHANGELOG.md'
-          
 
   build-publish:
     if: inputs.build-command != '' || inputs.publish-command != ''
@@ -91,7 +90,7 @@ jobs:
 
       - name: mise
         uses: jdx/mise-action@v3
-      
+
       - name: expose-version
         run: |
           {

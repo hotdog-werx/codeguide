@@ -1,5 +1,8 @@
 directories:
   - ./.pkglink/.codeguide/templates
 
+post_process:
+  - poe format
+
 context:
   codeguide_ref: topic/repolish

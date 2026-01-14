@@ -27,6 +27,8 @@
     "node_modules/**",
     "dist/**",
     ".venv/**",
-    "**/*-lock.json"
+    "**/*-lock.json",
+    "!.repolish/*",
+    ".repolish/setup-input/**"
   ]
 }
