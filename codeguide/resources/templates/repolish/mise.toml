@@ -3,7 +3,7 @@ experimental = true
 python.uv_venv_auto = true
 
 [env]
-GITHUB_REPO_OWNER = "hotdog-werx"
+GITHUB_REPO_OWNER = "{{ cookiecutter.owner }}"
 GITHUB_REPO_NAME = "{% raw %}{{ config_root | basename }}{% endraw %}"
 GITHUB_REPO = "{% raw %}{{ env.GITHUB_REPO_OWNER }}/{{ env.GITHUB_REPO_NAME }}{% endraw %}"
 GIT_CLIFF_CONFIG = "./.pkglink/.codeguide/configs/cliff.toml"
