@@ -6,6 +6,10 @@ on:
     types: [closed]
     branches: [master]
 
+permissions:
+  contents: write
+  pull-requests: read
+
 jobs:
   github-release:
     uses: hotdog-werx/codeguide/.github/workflows/_create-release.yaml@{{ cookiecutter.codeguide_ref }}
