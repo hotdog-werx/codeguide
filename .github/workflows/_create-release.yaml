@@ -41,6 +41,9 @@ jobs:
       - name: setup-uv
         uses: astral-sh/setup-uv@v7
 
+      - name: install-poethepoet
+        run: uv tool install poethepoet
+
       - name: mise
         uses: jdx/mise-action@v3
 
