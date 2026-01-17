@@ -28,6 +28,8 @@
     "dist/**",
     ".venv/**",
     "**/*-lock.json",
+    "template.*.yaml",
+    "**/templates/repolish/**",
     "!.repolish/*",
     ".repolish/setup-input/**"
   ]

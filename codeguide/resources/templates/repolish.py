@@ -1,9 +1,10 @@
 from datetime import UTC, datetime
+from typing import Any
 
 from codeguide.repolish_utils import get_owner_repo
 
 
-def create_context() -> dict[str, str]:
+def create_context() -> dict[str, Any]:
     """Base context for repolish."""
     owner, repo = get_owner_repo()
     return {
@@ -12,6 +13,5 @@ def create_context() -> dict[str, str]:
         'codeguide_ref': 'master',
         'year': str(datetime.now(tz=UTC).year),
         'ci_operating_systems': '["ubuntu-latest"]',
-        'build_command': 'poe build',
-        'publish_command': 'poe publish',
+        'release_commands': {'build': 'poe build', 'publish': 'poe publish'},
     }

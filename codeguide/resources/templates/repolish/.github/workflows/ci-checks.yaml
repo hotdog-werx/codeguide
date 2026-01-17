@@ -9,7 +9,7 @@ on:
 
 jobs:
   run-checks:
-    uses: hotdog-werx/codeguide/.github/workflows/_run-checks.yaml@{{ cookiecutter.codeguide_ref }}
+    uses: hotdog-werx/codeguide/.github/workflows/_ci-checks.yaml@{{ cookiecutter.codeguide_ref }}
     with:
       operating-systems: '{{ cookiecutter.ci_operating_systems }}'
 
