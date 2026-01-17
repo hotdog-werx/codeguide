@@ -47,6 +47,11 @@ jobs:
       - name: releez-finalize
         id: releez
         uses: hotdog-werx/releez-finalize-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
+          RELEEZ_GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_API_URL: ${{ github.api_url }}
         with:
           github-token: ${{ secrets.github-token || github.token }}
 
