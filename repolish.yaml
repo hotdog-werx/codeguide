@@ -6,3 +6,6 @@ post_process:
 
 context:
   codeguide_ref: topic/repolish
+  release_commands:
+    build: ''
+    publish: ''

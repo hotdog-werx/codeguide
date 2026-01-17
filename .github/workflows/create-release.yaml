@@ -11,7 +11,7 @@ jobs:
     uses: hotdog-werx/codeguide/.github/workflows/_create-release.yaml@topic/repolish
     secrets: inherit
     with:
-      build-command: 'poe build'
-      publish-command: 'poe publish'
+      build-command: ''
+      publish-command: ''
 
 ## post-release jobs - add your custom jobs here
