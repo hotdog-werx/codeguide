@@ -44,8 +44,6 @@ jobs:
       - name: releez-finalize
         id: releez
         uses: hotdog-werx/releez-finalize-action@v0
-        with:
-          is-full-release: 'true'
 
       - name: enhance-release-notes
         id: enhance-notes
