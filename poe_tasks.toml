@@ -4,9 +4,12 @@ include = [
   ".pkglink/.codeguide/poe/ci-checks.toml",
   ".pkglink/.codeguide/poe/dev-setup.toml",
   ".pkglink/.codeguide/poe/docs.toml",
+  ".pkglink/.codeguide/poe/repo-tasks.toml",
 ]
 
 [tool.poe.tasks]
+## repo-tasks
+
 ci-checks.help = "run all checks for CI"
 ci-checks.sequence = [
   "check-python",

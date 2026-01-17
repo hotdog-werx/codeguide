@@ -9,7 +9,7 @@ on:
 
 jobs:
   run-checks:
-    uses: hotdog-werx/repolish/.github/workflows/_run-checks.yaml@topic/repolish
+    uses: hotdog-werx/codeguide/.github/workflows/_run-checks.yaml@topic/repolish
     with:
       operating-systems: '["ubuntu-latest"]'
 

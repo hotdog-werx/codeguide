@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   deploy-docs:
-    uses: hotdog-werx/repolish/.github/workflows/_deploy-docs.yaml@topic/repolish
+    uses: hotdog-werx/codeguide/.github/workflows/_deploy-docs.yaml@topic/repolish
     permissions:
       contents: read
       pages: write
