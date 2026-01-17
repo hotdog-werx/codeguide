@@ -75,7 +75,7 @@ jobs:
           body: ${{ steps.enhance-notes.outputs.enhanced-notes }}
 
       - name: regenerate-changelog
-        run: releez changelog generate
+        run: releez changelog regenerate
 
       - name: commit-changes
         uses: stefanzweifel/git-auto-commit-action@v7
