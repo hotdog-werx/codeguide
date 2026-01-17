@@ -13,7 +13,7 @@ This changelog is automatically generated using
 [git-cliff](https://git-cliff.org/) from commit messages following
 [Conventional Commits](https://www.conventionalcommits.org/).
 
-Changes since the last release can be viewed on [here][unreleased].
+View [unreleased changes][unreleased] since the last release.
 
 """
 body = """
@@ -30,8 +30,8 @@ body = """
 {%- if commit.remote.username %} by [@{{ commit.remote.username }}](https://github.com/{{ commit.remote.username }}){%- endif -%}
 {%- if commit.remote.pr_number %} in [#{{ commit.remote.pr_number }}]({{ repo_url }}/pull/{{ commit.remote.pr_number }}){%- endif %}
 {% endfor -%}
-{% endfor -%}
-{%- if version -%}
+{% endfor %}
+{% if version -%}
 {%- set repo_url = "https://github.com/" ~ get_env(name="GITHUB_REPO", default="owner/repo") -%}
 {% if previous -%}
 {% if previous.version -%}
