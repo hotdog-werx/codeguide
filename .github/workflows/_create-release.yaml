@@ -47,6 +47,13 @@ jobs:
       - name: mise
         uses: jdx/mise-action@v3
 
+      - name: get-releez-version
+        id: get-releez-version
+        run: |
+          RELEEZ_VERSION=$(mise ls --json | jq -r '.["pipx:hotdog-werx/releez"][0].version')
+          echo "version=$RELEEZ_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Releez version: $RELEEZ_VERSION"
+
       - name: releez-finalize
         id: releez
         uses: hotdog-werx/releez-finalize-action@v0
@@ -57,6 +64,7 @@ jobs:
           GITHUB_API_URL: ${{ github.api_url }}
         with:
           github-token: ${{ secrets.github-token || github.token }}
+          releez-version: ${{ steps.get-releez-version.outputs.version }}
 
       - name: enhance-release-notes
         id: enhance-notes
