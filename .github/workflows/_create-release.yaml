@@ -135,8 +135,12 @@ jobs:
 
       - name: build-project
         if: inputs.build-command != ''
+        env:
+          MISE_VERBOSE: '1'
         run: ${{ inputs.build-command }}
 
       - name: publish-package
         if: inputs.publish-command != ''
+        env:
+          MISE_VERBOSE: '1'
         run: ${{ inputs.publish-command }}
