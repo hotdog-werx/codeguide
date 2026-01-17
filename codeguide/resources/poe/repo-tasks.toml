@@ -3,3 +3,9 @@ _pull-tags.cmd = "git pull --tags -f"
 
 start-releez.help = "release start with releez"
 start-releez.sequence = ["_pull-tags", { cmd = "releez release start" }]
+
+build.help = "Build package (requires VERSION env var)"
+build.cmd = ".pkglink/.codeguide/release-scripts/build.sh"
+
+publish.help = "Publish package to PyPI (requires VERSION, PYPI_TOKEN, IS_RELEASE env vars)"
+publish.cmd = ".pkglink/.codeguide/release-scripts/publish.sh"
