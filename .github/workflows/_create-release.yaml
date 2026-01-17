@@ -77,14 +77,19 @@ jobs:
           tag_name: ${{ steps.releez.outputs.release-version }}
           body: ${{ steps.enhance-notes.outputs.enhanced-notes }}
 
+      - name: debug-releez-installation
+        run: |
+          mise which releez || echo "releez not found in mise"
+          ls -la /home/runner/.local/share/mise/installs/pipx-hotdog-werx-releez/topic-changelog-regen/ || echo "directory doesn't exist"
+          find /home/runner/.local/share/mise/installs/ -name "releez" -type f 2>/dev/null || echo "no releez binary found"
+
       - name: regenerate-changelog
         env:
           GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
           RELEEZ_GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_API_URL: ${{ github.api_url }}
-          MISE_VERBOSE: '1'
-        run: releez changelog regenerate
+        run: mise exec -- releez changelog regenerate
 
       - name: commit-changes
         uses: stefanzweifel/git-auto-commit-action@v7
