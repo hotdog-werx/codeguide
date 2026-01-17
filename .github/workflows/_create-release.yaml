@@ -40,6 +40,9 @@ jobs:
 
       - name: setup-uv
         uses: astral-sh/setup-uv@v7
+        with:
+          python-version: 3.11
+          activate-environment: true
 
       - name: install-poethepoet
         run: uv tool install poethepoet
@@ -119,6 +122,9 @@ jobs:
 
       - name: setup-uv
         uses: astral-sh/setup-uv@v7
+        with:
+          python-version: 3.11
+          activate-environment: true
 
       - name: mise
         uses: jdx/mise-action@v3
@@ -143,10 +149,15 @@ jobs:
             echo "=== Checking if interpreter exists ==="
             SHEBANG=$(head -1 /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/poe | sed 's/#!//')
             ls -la "$SHEBANG" || echo "Shebang interpreter doesn't exist"
+            echo "=== Checking final python target ==="
+            ls -la /home/runner/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/bin/python3.11 || echo "Final python doesn't exist"
+            echo "=== Trying to execute python directly ==="
+            /home/runner/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/bin/python3.11 --version || echo "Can't execute python"
           fi
-          echo "=== Checking uv poe ==="
-          which poe
-          poe --version
+          echo "=== Checking PATH ==="
+          echo "$PATH"
+          echo "=== All poe executables in PATH ==="
+          which -a poe || echo "No poe found"
 
       - name: build-project
         if: inputs.build-command != ''
