@@ -17,6 +17,9 @@ on:
       PYPI_TOKEN:
         description: 'PyPI API token for publishing packages'
         required: false
+      github-token:
+        description: 'GitHub token for creating releases'
+        required: false
 
 permissions:
   contents: write
@@ -44,6 +47,8 @@ jobs:
       - name: releez-finalize
         id: releez
         uses: hotdog-werx/releez-finalize-action@v0
+        with:
+          github-token: ${{ secrets.github-token || github.token }}
 
       - name: enhance-release-notes
         id: enhance-notes
