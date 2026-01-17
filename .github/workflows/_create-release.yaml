@@ -120,11 +120,11 @@ jobs:
       - name: setup-uv
         uses: astral-sh/setup-uv@v7
 
-      - name: install-poethepoet
-        run: uv tool install poethepoet
-
       - name: mise
         uses: jdx/mise-action@v3
+
+      - name: install-poethepoet
+        run: uv tool install poethepoet
 
       - name: expose-version
         run: |
@@ -132,6 +132,21 @@ jobs:
             echo "IS_RELEASE=true"
             echo "VERSION=${{ needs.github-release.outputs.release-version }}"
           } >> $GITHUB_ENV
+
+      - name: debug-poe-installation
+        run: |
+          echo "=== Checking mise poe installation ==="
+          ls -la /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/ || echo "bin directory doesn't exist"
+          if [ -f /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/poe ]; then
+            echo "=== poe binary exists, checking shebang ==="
+            head -1 /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/poe
+            echo "=== Checking if interpreter exists ==="
+            SHEBANG=$(head -1 /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/poe | sed 's/#!//')
+            ls -la "$SHEBANG" || echo "Shebang interpreter doesn't exist"
+          fi
+          echo "=== Checking uv poe ==="
+          which poe
+          poe --version
 
       - name: build-project
         if: inputs.build-command != ''
