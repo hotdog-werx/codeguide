@@ -75,6 +75,12 @@ jobs:
           body: ${{ steps.enhance-notes.outputs.enhanced-notes }}
 
       - name: regenerate-changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
+          RELEEZ_GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_API_URL: ${{ github.api_url }}
+          MISE_VERBOSE: '1'
         run: releez changelog regenerate
 
       - name: commit-changes
