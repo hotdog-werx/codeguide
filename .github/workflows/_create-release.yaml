@@ -161,12 +161,14 @@ jobs:
 
       - name: build-project
         if: inputs.build-command != ''
+        shell: bash
         env:
           MISE_VERBOSE: '1'
         run: ${{ inputs.build-command }}
 
       - name: publish-package
         if: inputs.publish-command != ''
+        shell: bash
         env:
           MISE_VERBOSE: '1'
         run: ${{ inputs.publish-command }}
