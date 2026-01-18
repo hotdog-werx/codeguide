@@ -20,12 +20,9 @@ jobs:
       - name: check-docs-folder
         id: check-docs
         run: |
-          if [ -d "docs" ]; then
-            echo "has-docs=true" >> $GITHUB_OUTPUT
-          else
-            echo "has-docs=false" >> $GITHUB_OUTPUT
-            echo "No docs folder found, skipping documentation deployment"
-          fi
+          HAS_DOCS=$([ -d "docs" ] && echo "true" || echo "false")
+          echo "has-docs=$HAS_DOCS" >> "$GITHUB_OUTPUT"
+          echo "Documentation folder exists: $HAS_DOCS"
 
   build-and-deploy:
     needs: check-docs

@@ -76,9 +76,11 @@ jobs:
           PR_NUMBER="${{ github.event.pull_request.number }}"
           PR_LINK="https://github.com/${{ github.repository }}/pull/${PR_NUMBER}"
           ENHANCED_NOTES="${NOTES}\n\n---\nAutomated release triggered by [#${PR_NUMBER}](${PR_LINK})"
-          echo "enhanced-notes<<EOF" >> $GITHUB_OUTPUT
-          echo -e "${ENHANCED_NOTES}" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          {
+            echo "enhanced-notes<<EOF"
+            echo -e "${ENHANCED_NOTES}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: create-github-release
         uses: softprops/action-gh-release@v2
@@ -127,7 +129,7 @@ jobs:
           {
             echo "IS_RELEASE=true"
             echo "VERSION=${{ needs.github-release.outputs.release-version }}"
-          } >> $GITHUB_ENV
+          } >> "$GITHUB_ENV"
 
       - name: build-project
         if: inputs.build-command != ''
