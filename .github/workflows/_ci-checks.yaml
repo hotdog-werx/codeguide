@@ -34,6 +34,7 @@ jobs:
 
       - name: check-docs-folder
         id: check-docs
+        shell: bash
         run: |
           HAS_DOCS=$([ -d "docs" ] && echo "true" || echo "false")
           echo "has-docs=$HAS_DOCS" >> "$GITHUB_OUTPUT"
