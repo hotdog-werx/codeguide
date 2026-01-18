@@ -43,6 +43,12 @@ jobs:
         run: poe check-dprint
       - name: check-python
         run: poe check-python
+      - name: check-basedpyright
+        run: poe check-basedpyright
+      - name: check-complexity
+        run: poe check-complexity
+      - name: check-coverage
+        run: poe check-coverage
       - name: build-docs
         if: steps.check-docs.outputs.has-docs == 'true'
         run: poe build-docs
