@@ -12,7 +12,7 @@ GIT_CLIFF_CONFIG = "./.pkglink/.codeguide/configs/cliff.toml"
 pkglink.run = "uvx pkglink sync"
 
 [hooks]
-postinstall = ["mise run pkglink", "poe setup"]
+postinstall = ["mise run pkglink", "poe setup-hook"]
 
 [tools]
 uv = "0.7.20"
