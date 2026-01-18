@@ -32,26 +32,34 @@ jobs:
       - name: dependencies
         run: poe uv-sync
 
-      - name: check-docs-folder
-        id: check-docs
+      - name: check-project-features
+        id: check-features
         shell: bash
         run: |
           HAS_DOCS=$([ -d "docs" ] && echo "true" || echo "false")
           echo "has-docs=$HAS_DOCS" >> "$GITHUB_OUTPUT"
           echo "Documentation folder exists: $HAS_DOCS"
+          
+          HAS_PYTHON=$([ -f "pyproject.toml" ] && grep -q "\[build-system\]" pyproject.toml && echo "true" || echo "false")
+          echo "has-python=$HAS_PYTHON" >> "$GITHUB_OUTPUT"
+          echo "Python build system detected: $HAS_PYTHON"
 
       - name: check-dprint
         run: poe check-dprint
       - name: check-python
+        if: steps.check-features.outputs.has-python == 'true'
         run: poe check-python
       - name: check-basedpyright
+        if: steps.check-features.outputs.has-python == 'true'
         run: poe check-basedpyright
       - name: check-complexity
+        if: steps.check-features.outputs.has-python == 'true'
         run: poe check-complexity
       - name: check-coverage
+        if: steps.check-features.outputs.has-python == 'true'
         run: poe check-coverage
       - name: build-docs
-        if: steps.check-docs.outputs.has-docs == 'true'
+        if: steps.check-features.outputs.has-docs == 'true'
         run: poe build-docs
       - name: check-repolish
         run: poe check-repolish
