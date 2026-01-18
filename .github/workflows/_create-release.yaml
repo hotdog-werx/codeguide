@@ -41,14 +41,12 @@ jobs:
       - name: setup-uv
         uses: astral-sh/setup-uv@v7
         with:
-          python-version: 3.11
-          activate-environment: true
-
-      - name: install-poethepoet
-        run: uv tool install poethepoet
-
+          enable-cache: true
+          cache-dependency-glob: '**/pyproject.toml'
       - name: mise
         uses: jdx/mise-action@v3
+      - name: dependencies
+        run: poe uv-sync
 
       - name: get-releez-version
         id: get-releez-version
@@ -88,12 +86,6 @@ jobs:
           tag_name: ${{ steps.releez.outputs.release-version }}
           body: ${{ steps.enhance-notes.outputs.enhanced-notes }}
 
-      - name: debug-releez-installation
-        run: |
-          mise which releez || echo "releez not found in mise"
-          ls -la /home/runner/.local/share/mise/installs/pipx-hotdog-werx-releez/topic-changelog-regen/ || echo "directory doesn't exist"
-          find /home/runner/.local/share/mise/installs/ -name "releez" -type f 2>/dev/null || echo "no releez binary found"
-
       - name: regenerate-changelog
         env:
           GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
@@ -123,14 +115,12 @@ jobs:
       - name: setup-uv
         uses: astral-sh/setup-uv@v7
         with:
-          python-version: 3.11
-          activate-environment: true
-
+          enable-cache: true
+          cache-dependency-glob: '**/pyproject.toml'
       - name: mise
         uses: jdx/mise-action@v3
-
-      - name: install-poethepoet
-        run: uv tool install poethepoet
+      - name: dependencies
+        run: poe uv-sync
 
       - name: expose-version
         run: |
@@ -139,36 +129,10 @@ jobs:
             echo "VERSION=${{ needs.github-release.outputs.release-version }}"
           } >> $GITHUB_ENV
 
-      - name: debug-poe-installation
-        run: |
-          echo "=== Checking mise poe installation ==="
-          ls -la /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/ || echo "bin directory doesn't exist"
-          if [ -f /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/poe ]; then
-            echo "=== poe binary exists, checking shebang ==="
-            head -1 /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/poe
-            echo "=== Checking if interpreter exists ==="
-            SHEBANG=$(head -1 /home/runner/.local/share/mise/installs/pipx-poethepoet/0.36.0/bin/poe | sed 's/#!//')
-            ls -la "$SHEBANG" || echo "Shebang interpreter doesn't exist"
-            echo "=== Checking final python target ==="
-            ls -la /home/runner/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/bin/python3.11 || echo "Final python doesn't exist"
-            echo "=== Trying to execute python directly ==="
-            /home/runner/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/bin/python3.11 --version || echo "Can't execute python"
-          fi
-          echo "=== Checking PATH ==="
-          echo "$PATH"
-          echo "=== All poe executables in PATH ==="
-          which -a poe || echo "No poe found"
-
       - name: build-project
         if: inputs.build-command != ''
-        shell: bash
-        env:
-          MISE_VERBOSE: '1'
         run: ${{ inputs.build-command }}
 
       - name: publish-package
         if: inputs.publish-command != ''
-        shell: bash
-        env:
-          MISE_VERBOSE: '1'
         run: ${{ inputs.publish-command }}

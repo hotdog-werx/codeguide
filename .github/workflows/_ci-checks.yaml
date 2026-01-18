@@ -21,20 +21,31 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+
       - name: setup-uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: 3.11
-          activate-environment: true
+          enable-cache: true
+          cache-dependency-glob: '**/pyproject.toml'
       - name: mise
         uses: jdx/mise-action@v3
-      - name: poe
-        run: uv tool install poethepoet
       - name: dependencies
-        run: uvx --from poethepoet poe uv-sync
+        run: poe uv-sync
+
+      - name: check-docs-folder
+        id: check-docs
+        run: |
+          if [ -d "docs" ]; then
+            echo "has-docs=true" >> $GITHUB_OUTPUT
+          else
+            echo "has-docs=false" >> $GITHUB_OUTPUT
+            echo "No docs folder found, skipping documentation deployment"
+          fi
+
       - name: check-dprint
         run: poe check-dprint
       - name: check-python
         run: poe check-python
       - name: build-docs
+        if: steps.check-docs.outputs.has-docs == 'true'
         run: poe build-docs
