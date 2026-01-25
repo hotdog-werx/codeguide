@@ -39,7 +39,7 @@ jobs:
           HAS_DOCS=$([ -d "docs" ] && echo "true" || echo "false")
           echo "has-docs=$HAS_DOCS" >> "$GITHUB_OUTPUT"
           echo "Documentation folder exists: $HAS_DOCS"
-          
+
           HAS_PYTHON=$([ -f "pyproject.toml" ] && grep -q "\[build-system\]" pyproject.toml && echo "true" || echo "false")
           echo "has-python=$HAS_PYTHON" >> "$GITHUB_OUTPUT"
           echo "Python build system detected: $HAS_PYTHON"
