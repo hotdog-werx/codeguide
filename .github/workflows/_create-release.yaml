@@ -69,18 +69,22 @@ jobs:
 
       - name: enhance-release-notes
         id: enhance-notes
+        shell: python
         env:
-          GITHUB_TOKEN: ${{ secrets.github-token || github.token }}
+          NOTES: ${{ steps.releez.outputs.release-notes }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          NOTES="${{ steps.releez.outputs.release-notes }}"
-          PR_NUMBER="${{ github.event.pull_request.number }}"
-          PR_LINK="https://github.com/${{ github.repository }}/pull/${PR_NUMBER}"
-          ENHANCED_NOTES="${NOTES}\n\n---\nAutomated release triggered by [#${PR_NUMBER}](${PR_LINK})"
-          {
-            echo "enhanced-notes<<EOF"
-            echo -e "${ENHANCED_NOTES}"
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
+          import os
+          notes = os.environ['NOTES']
+          pr_number = os.environ['PR_NUMBER']
+          repo = os.environ['GITHUB_REPOSITORY']
+          pr_link = f'https://github.com/{repo}/pull/{pr_number}'
+          enhanced_notes = f'{notes}\n\n---\nAutomated release triggered by [#{pr_number}]({pr_link})'
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('enhanced-notes<<EOF\n')
+              f.write(enhanced_notes)
+              f.write('\nEOF\n')
 
       - name: create-github-release
         uses: softprops/action-gh-release@v2
