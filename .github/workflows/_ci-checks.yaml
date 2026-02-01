@@ -49,9 +49,9 @@ jobs:
       - name: check-python
         if: steps.check-features.outputs.has-python == 'true'
         run: poe check-python
-      - name: check-basedpyright
+      - name: check-ty
         if: steps.check-features.outputs.has-python == 'true'
-        run: poe check-basedpyright
+        run: poe check-ty
       - name: check-complexity
         if: steps.check-features.outputs.has-python == 'true'
         run: poe check-complexity

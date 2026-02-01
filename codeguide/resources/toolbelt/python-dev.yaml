@@ -12,6 +12,20 @@ profiles:
         default_target: .
         description: basedPyright type checker
 
+  ty:
+    extensions: ['.py']
+    format_tools: []
+    check_tools:
+      - name: ty
+        command: uvx
+        args:
+          - ty@${TB_TY_VERSION:latest}
+          - check
+          - ${TB_TY_EXTRA_ARGS:}
+        file_handling_mode: batch
+        default_target: .
+        description: ty type checker
+
   complexity:
     extensions: ['.py']
     format_tools: []
@@ -47,3 +61,4 @@ profiles:
 variables:
   TB_COMPLEXIPY_VERSION: 4.0.2
   TB_BASEDPYRIGHT_VERSION: 1.31.3
+  TB_TY_VERSION: latest

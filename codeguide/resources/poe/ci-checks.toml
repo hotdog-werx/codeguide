@@ -8,6 +8,9 @@ check-dprint.cmd = "uvx tbelt check dprint"
 check-basedpyright.help = "run base dpyright checks"
 check-basedpyright.cmd = "uvx tbelt check basedpyright"
 
+check-ty.help = "run ty checks"
+check-ty.cmd = "uvx tbelt check ty"
+
 check-complexity.help = "run complexity checks"
 check-complexity.cmd = "uvx tbelt check complexity"
 
