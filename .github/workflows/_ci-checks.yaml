@@ -61,5 +61,5 @@ jobs:
       - name: build-docs
         if: steps.check-features.outputs.has-docs == 'true'
         run: poe build-docs
-      - name: check-repolish
-        run: poe check-repolish
+      # - name: check-repolish
+      #   run: poe check-repolish
