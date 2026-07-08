@@ -65,7 +65,8 @@ jobs:
           GITHUB_API_URL: ${{ github.api_url }}
         with:
           github-token: ${{ secrets.github-token || github.token }}
-          releez-version: ${{ steps.get-releez-version.outputs.version }}
+          # pinning to specific version since new versions output multiple versions and this breaks the action
+          releez-version: 0.2.6 #${{ steps.get-releez-version.outputs.version }}
 
       - name: enhance-release-notes
         id: enhance-notes
