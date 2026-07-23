@@ -19,8 +19,9 @@ if [ -d dist ]; then
 fi
 
 # Set version with hatch
-echo "Setting version with hatch..."
-uvx hatch version "${VERSION}"
+# This is now handled by releez
+# echo "Setting version with hatch..."
+# uvx hatch version "${VERSION}"
 
 # Build the package
 echo "Building package..."
